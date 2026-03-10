@@ -7,14 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Unbounded:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:#0a0c10;--surface:#111318;--surface2:#181c24;--border:#1e2330;
-    --accent:#00e5a0;--accent2:#ff6b35;--accent3:#5b8df6;--warn:#ffcc00;--red:#ff4466;--purple:#c47aff;
-    --text:#e8ecf4;--muted:#6b7694;
+    --bg:#f0f2f5;--surface:#ffffff;--surface2:#f5f7fa;--border:#dde1ea;
+    --accent:#00b87a;--accent2:#ff6b35;--accent3:#3d74e8;--warn:#e6a800;--red:#e8244a;--purple:#9b59d6;
+    --text:#1a1d2e;--muted:#8892a4;
     --mono:'Space Mono',monospace;--display:'Unbounded',sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--bg);color:var(--text);font-family:var(--mono);min-height:100vh;overflow-x:hidden;}
-  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,160,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,160,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,0,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
   .container{position:relative;z-index:1;max-width:1500px;margin:0 auto;padding:24px;}
 
   header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
@@ -23,7 +23,7 @@
   .date-display{font-family:var(--display);font-size:12px;font-weight:300;color:var(--muted);text-align:right;}
   .date-display strong{display:block;font-size:14px;font-weight:700;color:var(--text);margin-top:2px;}
 
-  .tabs{display:flex;gap:4px;margin-bottom:22px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:4px;}
+  .tabs{display:flex;gap:4px;margin-bottom:22px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:4px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
   .tab-btn{flex:1;padding:10px 16px;border:none;background:transparent;color:var(--muted);font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:0.3px;cursor:pointer;border-radius:9px;transition:all 0.2s;}
   .tab-btn.active{background:var(--surface2);color:var(--text);box-shadow:0 0 0 1px var(--border);}
   .tab-btn[data-tab="sales"].active{color:var(--accent);}
@@ -35,14 +35,14 @@
   .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px;}
   .kpi-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px;}
   .kpi-grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:18px;}
-  .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;overflow:hidden;transition:border-color 0.2s;}
+  .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;overflow:hidden;transition:border-color 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
   .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-color,var(--accent));}
   .kpi-card:hover{border-color:var(--card-color,var(--accent));}
   .kpi-label{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:8px;}
   .kpi-value{font-family:var(--display);font-size:22px;font-weight:900;color:var(--card-color,var(--accent));line-height:1;margin-bottom:5px;}
   .kpi-sub{font-size:10px;color:var(--muted);}
 
-  .panel{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;}
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
   .panel-title{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
   .panel-title::before{content:'';display:inline-block;width:5px;height:5px;background:var(--accent);border-radius:50%;}
   .panel-title.blue::before{background:var(--accent3);}
@@ -54,16 +54,16 @@
   .chart-wrap{position:relative;}
   canvas{display:block;}
 
-  .input-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;}
+  .input-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
   .input-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
   .field{display:flex;flex-direction:column;gap:5px;}
   .field label{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);}
   .field input{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:8px 10px;color:var(--text);font-family:var(--mono);font-size:12px;outline:none;transition:border-color 0.2s;min-width:100px;}
-  .field input:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(0,229,160,0.1);}
+  .field input:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(0,184,122,0.15);}
   .field input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);}
 
   .btn-add{background:var(--accent);color:#000;border:none;border-radius:8px;padding:9px 18px;font-family:var(--display);font-size:11px;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:transform 0.1s,box-shadow 0.2s;white-space:nowrap;align-self:flex-end;height:36px;}
-  .btn-add:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,229,160,0.4);}
+  .btn-add:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,184,122,0.35);}
   .btn-add.blue{background:var(--accent3);}
   .btn-add.blue:hover{box-shadow:0 4px 20px rgba(91,141,246,0.4);}
   .btn-add.yellow{background:var(--warn);}
@@ -72,8 +72,8 @@
   .table-wrap{overflow-x:auto;max-height:340px;overflow-y:auto;}
   table{width:100%;border-collapse:collapse;}
   thead th{font-size:8px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);padding:7px 9px;text-align:left;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:2;white-space:nowrap;}
-  tbody tr{border-bottom:1px solid rgba(30,35,48,0.5);transition:background 0.15s;}
-  tbody tr:hover{background:rgba(0,229,160,0.03);}
+  tbody tr{border-bottom:1px solid rgba(0,0,0,0.07);transition:background 0.15s;}
+  tbody tr:hover{background:rgba(0,184,122,0.05);}
   tbody td{padding:8px 9px;font-size:11px;white-space:nowrap;}
   .pct-bar{display:flex;align-items:center;gap:6px;}
   .bar-track{height:3px;background:var(--surface2);border-radius:2px;overflow:hidden;width:50px;}
@@ -177,10 +177,10 @@
         <div class="panel-title">Sales Revenue</div>
         <div class="gauge-section">
           <svg width="190" height="105" viewBox="0 0 190 105" style="overflow:visible">
-            <path d="M 15 95 A 80 80 0 0 1 175 95" fill="none" stroke="#1e2330" stroke-width="13" stroke-linecap="round"/>
+            <path d="M 15 95 A 80 80 0 0 1 175 95" fill="none" stroke="#dde1ea" stroke-width="13" stroke-linecap="round"/>
             <path id="g-sr" d="M 15 95 A 80 80 0 0 1 175 95" fill="none" stroke="#00e5a0" stroke-width="13" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2" style="transition:stroke-dashoffset 0.8s ease;"/>
             <text id="g-sr-val" x="95" y="88" fill="#00e5a0" style="font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;text-anchor:middle;">0%</text>
-            <text x="95" y="102" style="font-size:8px;fill:#6b7694;font-family:'Space Mono';text-anchor:middle;letter-spacing:1px">ПЛАН</text>
+            <text x="95" y="102" style="font-size:8px;fill:#8892a4;font-family:'Space Mono';text-anchor:middle;letter-spacing:1px">ПЛАН</text>
           </svg>
           <div style="display:flex;gap:24px;font-size:11px;">
             <div><span style="color:var(--muted);font-size:9px">Факт</span><br><strong id="g-sr-fact" style="color:var(--accent);font-family:var(--display)">—</strong></div>
@@ -210,21 +210,11 @@
     </div>
   </div>
 
-  <div class="kpi-grid-5" style="margin-bottom:18px;">
-    <div class="kpi-card" style="--card-color:var(--accent3)">
-      <div class="kpi-label">Кількість акцій</div>
-      <div class="kpi-value" id="m-count">0</div>
-      <div class="kpi-sub">Записів</div>
-    </div>
+  <div class="kpi-grid-3" style="margin-bottom:18px;">
     <div class="kpi-card" style="--card-color:var(--accent)">
       <div class="kpi-label">План кешбек</div>
       <div class="kpi-value" id="m-plan-cashback">—</div>
       <div class="kpi-sub" id="m-plan-month-label">Поточний місяць</div>
-    </div>
-    <div class="kpi-card" style="--card-color:var(--warn)">
-      <div class="kpi-label">Факт кешбек тотал</div>
-      <div class="kpi-value" id="m-cashback">—</div>
-      <div class="kpi-sub">Загалом</div>
     </div>
     <div class="kpi-card" style="--card-color:var(--accent2)">
       <div class="kpi-label">Виконання плану</div>
@@ -243,10 +233,7 @@
     <div class="input-row">
       <div class="field"><label>ГК</label><input type="text" id="m-inp-gk" placeholder="Назва партнера" style="min-width:150px"></div>
       <div class="field"><label>Дата</label><input type="date" id="m-inp-date"></div>
-      <div class="field"><label>Кількість днів</label><input type="number" id="m-inp-days" placeholder="7" style="min-width:110px"></div>
       <div class="field"><label>% Компенсації</label><input type="number" id="m-inp-comp-pct" placeholder="10" step="0.1" style="min-width:110px"></div>
-      <div class="field"><label>% CR</label><input type="number" id="m-inp-cr" placeholder="3.5" step="0.01" style="min-width:90px"></div>
-      <div class="field"><label>Кешбек Тотал (Факт)</label><input type="number" id="m-inp-cashback" placeholder="0" style="min-width:120px"></div>
       <div class="field"><label>Компенс. Постач.</label><input type="number" id="m-inp-supplier" placeholder="0" style="min-width:120px"></div>
       <button class="btn-add blue" onclick="addMkt()">+ Додати</button>
     </div>
@@ -257,7 +244,7 @@
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>ГК</th><th>Дата</th><th>Днів акції</th><th>% Комп.</th><th>% CR</th><th>Кешбек Тотал</th><th>Компенс. Постач.</th><th></th></tr>
+          <tr><th>ГК</th><th>Дата</th><th>% Комп.</th><th>Компенс. Постач.</th><th></th></tr>
         </thead>
         <tbody id="mkt-table"></tbody>
       </table>
@@ -330,10 +317,10 @@
         <div class="panel-title yellow">Поточна конверсія</div>
         <div class="gauge-section">
           <svg width="190" height="105" viewBox="0 0 190 105" style="overflow:visible">
-            <path d="M 15 95 A 80 80 0 0 1 175 95" fill="none" stroke="#1e2330" stroke-width="13" stroke-linecap="round"/>
+            <path d="M 15 95 A 80 80 0 0 1 175 95" fill="none" stroke="#dde1ea" stroke-width="13" stroke-linecap="round"/>
             <path id="g-conv" d="M 15 95 A 80 80 0 0 1 175 95" fill="none" stroke="#ffcc00" stroke-width="13" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2" style="transition:stroke-dashoffset 0.8s ease;"/>
             <text id="g-conv-val" x="95" y="88" fill="#ffcc00" style="font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;text-anchor:middle;">0%</text>
-            <text x="95" y="102" style="font-size:8px;fill:#6b7694;font-family:'Space Mono';text-anchor:middle;letter-spacing:1px">CONVERSION</text>
+            <text x="95" y="102" style="font-size:8px;fill:#8892a4;font-family:'Space Mono';text-anchor:middle;letter-spacing:1px">CONVERSION</text>
           </svg>
           <div style="font-size:10px;color:var(--muted);">Останній запис</div>
         </div>
@@ -356,7 +343,7 @@
 // ══════════════════════════════════════════════════════════
 //  КОНФІГУРАЦІЯ — вставте сюди URL після деплою Apps Script
 // ══════════════════════════════════════════════════════════
-const API_URL = 'https://script.google.com/macros/s/AKfycbyXJMEv5JP6l0Sy8gOhpYzccf2zo7tXnnvTcD7etIFcdvAsJVkUnfQw8qzgUcxS77cjmQ/exec';
+const API_URL = 'Вhttps://script.google.com/macros/s/AKfycby2njdsM1CA6Jx7Ite9tOa9zGdP2f5s_6a3sUEH1KSUG8C0HLmsRsiUAGme6sdCdhWPhw/exec';
 
 // ══════════ DATA (in-memory) ══════════
 let salesRows = [];
@@ -379,7 +366,7 @@ function cleanDate(s){
   return String(s).slice(0,10);
 }
 const pctColor=p=>p>=100?'var(--accent)':p>=80?'var(--warn)':'var(--red)';
-const pctBg=p=>p>=100?'rgba(0,229,160,0.15)':p>=80?'rgba(255,204,0,0.15)':'rgba(255,68,102,0.12)';
+const pctBg=p=>p>=100?'rgba(0,184,122,0.12)':p>=80?'rgba(230,168,0,0.12)':'rgba(232,36,74,0.1)';
 
 // ══════════ SYNC UI ══════════
 function setStatus(msg, color='var(--muted)') {
@@ -480,12 +467,12 @@ function getCanvas(id,h){
 function drawLine(id,labels,datasets,opts){
   const {c,ctx,W,H}=getCanvas(id);
   ctx.clearRect(0,0,W,H);
-  if(!labels||labels.length<2){ctx.fillStyle='#6b7694';ctx.font='10px Space Mono';ctx.textAlign='center';ctx.fillText('Додайте більше записів',W/2,H/2);return;}
+  if(!labels||labels.length<2){ctx.fillStyle='#8892a4';ctx.font='10px Space Mono';ctx.textAlign='center';ctx.fillText('Додайте більше записів',W/2,H/2);return;}
   const pad={t:14,r:14,b:26,l:42};
   const w=W-pad.l-pad.r, h=H-pad.t-pad.b;
   const allV=datasets.flatMap(d=>d.data);
   const minV=0, maxV=Math.max(...allV)*1.12||1;
-  for(let i=0;i<=4;i++){const v=maxV*i/4;const y=pad.t+h-v/maxV*h;ctx.strokeStyle='#1e2330';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.fillStyle='#6b7694';ctx.font='8px Space Mono';ctx.textAlign='right';ctx.fillText(opts&&opts.pct?v.toFixed(1)+'%':fmt(Math.round(v)),pad.l-3,y+3);}
+  for(let i=0;i<=4;i++){const v=maxV*i/4;const y=pad.t+h-v/maxV*h;ctx.strokeStyle='#dde1ea';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.fillStyle='#8892a4';ctx.font='8px Space Mono';ctx.textAlign='right';ctx.fillText(opts&&opts.pct?v.toFixed(1)+'%':fmt(Math.round(v)),pad.l-3,y+3);}
   if(opts&&opts.ref!=null){const yr=pad.t+h-opts.ref/maxV*h;ctx.strokeStyle='rgba(255,204,0,0.3)';ctx.setLineDash([3,3]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,yr);ctx.lineTo(W-pad.r,yr);ctx.stroke();ctx.setLineDash([]);}
   datasets.forEach(ds=>{
     const pts=ds.data.map((v,i)=>({x:pad.l+(labels.length<2?0:i/(labels.length-1))*w,y:pad.t+h-v/maxV*h}));
@@ -494,21 +481,21 @@ function drawLine(id,labels,datasets,opts){
     pts.forEach((p,i)=>{ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fillStyle=ds.dotFn?ds.dotFn(ds.data[i]):ds.color;ctx.fill();});
   });
   const step=Math.max(1,Math.ceil(labels.length/9));
-  ctx.fillStyle='#6b7694';ctx.font='8px Space Mono';ctx.textAlign='center';
+  ctx.fillStyle='#8892a4';ctx.font='8px Space Mono';ctx.textAlign='center';
   labels.forEach((l,i)=>{if(i%step===0)ctx.fillText(l,pad.l+(labels.length<2?0:i/(labels.length-1))*w,H-5);});
 }
 
 function drawBar(id,labels,datasets){
   const {c,ctx,W,H}=getCanvas(id);
   ctx.clearRect(0,0,W,H);
-  if(!labels||!labels.length){ctx.fillStyle='#6b7694';ctx.font='10px Space Mono';ctx.textAlign='center';ctx.fillText('Немає даних',W/2,H/2);return;}
+  if(!labels||!labels.length){ctx.fillStyle='#8892a4';ctx.font='10px Space Mono';ctx.textAlign='center';ctx.fillText('Немає даних',W/2,H/2);return;}
   const pad={t:14,r:14,b:38,l:42};
   const w=W-pad.l-pad.r, h=H-pad.t-pad.b;
   const allV=datasets.flatMap(d=>d.data);
   const maxV=Math.max(...allV)*1.15||1;
   const gW=w/labels.length;
   const bW=gW*0.32;
-  for(let i=0;i<=4;i++){const v=maxV*i/4;const y=pad.t+h-v/maxV*h;ctx.strokeStyle='#1e2330';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.fillStyle='#6b7694';ctx.font='8px Space Mono';ctx.textAlign='right';ctx.fillText(fmt(Math.round(v)),pad.l-3,y+3);}
+  for(let i=0;i<=4;i++){const v=maxV*i/4;const y=pad.t+h-v/maxV*h;ctx.strokeStyle='#dde1ea';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.fillStyle='#8892a4';ctx.font='8px Space Mono';ctx.textAlign='right';ctx.fillText(fmt(Math.round(v)),pad.l-3,y+3);}
   datasets.forEach((ds,di)=>{
     ds.data.forEach((v,i)=>{
       const cx=pad.l+i*gW+gW/2+(di-(datasets.length-1)/2)*(bW+3);
@@ -519,7 +506,7 @@ function drawBar(id,labels,datasets){
       ctx.fill();
     });
   });
-  ctx.fillStyle='#6b7694';ctx.font='8px Space Mono';ctx.textAlign='center';
+  ctx.fillStyle='#8892a4';ctx.font='8px Space Mono';ctx.textAlign='center';
   labels.forEach((l,i)=>{ctx.save();ctx.translate(pad.l+i*gW+gW/2,H-8);ctx.rotate(-0.35);ctx.fillText(l,0,0);ctx.restore();});
 }
 
@@ -554,7 +541,7 @@ function renderSalesTable(){
 function drawSalesChart(){
   const s=[...salesRows].sort((a,b)=>a.date.localeCompare(b.date));
   drawLine('chart-sales',s.map(r=>r.date.slice(5).replace('-','.')),
-    [{data:s.map(r=>r.plan>0?r.fact/r.plan*100:0),color:'#00e5a0',fill:'rgba(0,229,160,0.18)',dotFn:pctColor}],{pct:true,ref:100});
+    [{data:s.map(r=>r.plan>0?r.fact/r.plan*100:0),color:'#00b87a',fill:'rgba(0,184,122,0.12)',dotFn:pctColor}],{pct:true,ref:100});
 }
 function drawWeeksChart(){
   const wk={};
@@ -646,9 +633,9 @@ function renderMktTable(){
     return`<tr class="fade-in">
       <td style="color:var(--accent3);font-weight:700">${r.gk}</td>
       <td style="color:var(--muted)">${fmtD(r.date)}</td>
-      <td><span class="badge" style="color:var(--accent3);background:rgba(91,141,246,0.12)">${r.days||'—'} дн.</span></td>
-      <td><span class="badge" style="color:var(--warn);background:rgba(255,204,0,0.12)">${r.compPct||0}%</span></td>
-      <td><span class="badge" style="color:var(--accent2);background:rgba(255,107,53,0.12)">${r.cr||0}%</span></td>
+      <td><span class="badge" style="color:var(--accent3);background:rgba(61,116,232,0.1)">${r.days||'—'} дн.</span></td>
+      <td><span class="badge" style="color:var(--warn);background:rgba(230,168,0,0.1)">${r.compPct||0}%</span></td>
+      <td><span class="badge" style="color:var(--accent2);background:rgba(255,107,53,0.1)">${r.cr||0}%</span></td>
       <td style="color:var(--accent)">${fmt(r.cashback)}</td>
       <td style="color:var(--purple)">${fmt(r.supplier)}</td>
       <td><button class="del-btn" onclick="delMkt(${idx})">×</button></td>
@@ -670,7 +657,7 @@ function drawMktBar(){
 function drawMktCr(){
   const s=[...mktRows].sort((a,b)=>a.date.localeCompare(b.date));
   drawLine('chart-mkt-cr',s.map(r=>`${r.gk.slice(0,5)} ${fmtD(r.date).slice(0,5)}`),
-    [{data:s.map(r=>Number(r.cr)||0),color:'#ff6b35',fill:'rgba(255,107,53,0.15)',dotFn:()=>'#ff6b35'}],{pct:true});
+    [{data:s.map(r=>Number(r.cr)||0),color:'#ff6b35',fill:'rgba(255,107,53,0.1)',dotFn:()=>'#ff6b35'}],{pct:true});
 }
 function addMkt(){
   const gk=document.getElementById('m-inp-gk').value.trim();
@@ -699,25 +686,25 @@ function renderConvTable(){
   const tb=document.getElementById('conv-table');
   if(!convRows.length){tb.innerHTML='<tr><td colspan="6" class="empty">Додайте перший запис ↑</td></tr>';return;}
   tb.innerHTML=[...convRows].sort((a,b)=>b.date.localeCompare(a.date)).map(r=>{
-    const idx=convRows.indexOf(r), col=r.pct>=3.5?'var(--accent)':r.pct>=3?'var(--warn)':'var(--red)', bg=r.pct>=3.5?'rgba(0,229,160,0.12)':r.pct>=3?'rgba(255,204,0,0.12)':'rgba(255,68,102,0.12)';
+    const idx=convRows.indexOf(r), col=r.pct>=3.5?'var(--accent)':r.pct>=3?'var(--warn)':'var(--red)', bg=r.pct>=3.5?'rgba(0,184,122,0.12)':r.pct>=3?'rgba(230,168,0,0.12)':'rgba(232,36,74,0.1)';
     return`<tr class="fade-in"><td style="color:var(--muted)">${fmtD(r.date)}</td><td style="color:var(--accent3)">${fmt(r.conv)}</td><td><span class="badge" style="color:${col};background:${bg}">${r.pct}%</span></td><td style="color:var(--muted)">${fmt(r.sess)}</td><td style="color:var(--warn)">${fmt(r.orders)}</td><td><button class="del-btn" onclick="delConv(${idx})">×</button></td></tr>`;
   }).join('');
 }
 function drawConvPct(){
   const s=[...convRows].sort((a,b)=>a.date.localeCompare(b.date));
   drawLine('chart-conv-pct',s.map(r=>r.date.slice(5).replace('-','.')),
-    [{data:s.map(r=>Number(r.pct)||0),color:'#ffcc00',fill:'rgba(255,204,0,0.18)',dotFn:v=>v>=3.5?'var(--accent)':v>=3?'var(--warn)':'var(--red)'}],{pct:true});
+    [{data:s.map(r=>Number(r.pct)||0),color:'#e6a800',fill:'rgba(230,168,0,0.12)',dotFn:v=>v>=3.5?'var(--accent)':v>=3?'var(--warn)':'var(--red)'}],{pct:true});
 }
 function drawConvSO(){
   const s=[...convRows].sort((a,b)=>a.date.localeCompare(b.date));
   drawLine('chart-conv-so',s.map(r=>r.date.slice(5).replace('-','.')),
-    [{data:s.map(r=>Number(r.sess)||0),color:'#5b8df6',fill:'rgba(91,141,246,0.12)',dotFn:()=>'#5b8df6'},
-     {data:s.map(r=>Number(r.orders)||0),color:'#ff6b35',fill:'rgba(255,107,53,0.1)',dotFn:()=>'#ff6b35'}]);
+    [{data:s.map(r=>Number(r.sess)||0),color:'#5b8df6',fill:'rgba(61,116,232,0.1)',dotFn:()=>'#5b8df6'},
+     {data:s.map(r=>Number(r.orders)||0),color:'#ff6b35',fill:'rgba(255,107,53,0.08)',dotFn:()=>'#ff6b35'}]);
 }
 function drawConvNum(){
   const s=[...convRows].sort((a,b)=>a.date.localeCompare(b.date));
   drawLine('chart-conv-num',s.map(r=>r.date.slice(5).replace('-','.')),
-    [{data:s.map(r=>Number(r.conv)||0),color:'#c47aff',fill:'rgba(196,122,255,0.15)',dotFn:()=>'#c47aff'}]);
+    [{data:s.map(r=>Number(r.conv)||0),color:'#c47aff',fill:'rgba(155,89,214,0.1)',dotFn:()=>'#c47aff'}]);
 }
 function addConv(){
   const date=document.getElementById('c-inp-date').value;
