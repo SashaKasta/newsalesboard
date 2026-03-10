@@ -343,7 +343,7 @@
 // ══════════════════════════════════════════════════════════
 //  КОНФІГУРАЦІЯ — вставте сюди URL після деплою Apps Script
 // ══════════════════════════════════════════════════════════
-const API_URL = 'https://script.google.com/macros/s/AKfycbzhI4-xpkQwPDQsjm6Ty8LCab3eNh-chkHzta_g8oA2NEJgXoXZ5AIj3_hlJjxsXZemwQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbwvS0f3QvcGi8EgpGGln243uUH22l5XY8vdLeM3MQngGbTXAWlGZiW_v2gAoaM5fAkRPg/exec';
 
 // ══════════ DATA (in-memory) ══════════
 let salesRows = [];
@@ -597,17 +597,14 @@ function getCurrentMonth(){
 function renderMktKPI(){
   const curMonth = getCurrentMonth();
   const planVal  = monthlyPlans[curMonth] || 0;
-  const cb   = mktRows.reduce((a,r)=>a+Number(r.cashback||0),0);
   const sup  = mktRows.reduce((a,r)=>a+Number(r.supplier||0),0);
-  const n    = mktRows.length;
-  const pct  = planVal > 0 ? cb/planVal*100 : 0;
-  const left = planVal - cb;          // залишок = план − факт кешбек
-  const diff = planVal - sup;         // різниця = план − компенсація постачальника
+  // Виконання = Компенсація постачальника / План кешбек
+  const pct  = planVal > 0 ? sup/planVal*100 : 0;
+  const left = planVal - sup;
+  const diff = planVal - sup;
 
-  document.getElementById('m-count').textContent = n;
   document.getElementById('m-plan-cashback').textContent = planVal ? fmt(planVal) : '—';
   document.getElementById('m-plan-month-label').textContent = planVal ? curMonth.replace('-','/') : 'Не встановлено';
-  document.getElementById('m-cashback').textContent = fmt(cb);
   document.getElementById('m-cashback-pct').textContent = planVal ? pct.toFixed(1)+'%' : '—';
   document.getElementById('m-cashback-pct').style.color = planVal ? pctColor(pct) : 'var(--muted)';
 
@@ -620,7 +617,6 @@ function renderMktKPI(){
   diffEl.textContent = planVal ? fmt(Math.abs(diff)) : '—';
   diffEl.style.color = diff >= 0 ? 'var(--warn)' : 'var(--red)';
 
-  // Підставляємо поточний місяць у поле введення якщо порожнє
   const monthInp = document.getElementById('m-inp-month');
   if(monthInp && !monthInp.value) monthInp.value = curMonth;
   if(monthInp && planVal) document.getElementById('m-inp-monthly-plan').value = planVal;
@@ -633,39 +629,34 @@ function renderMktTable(){
     return`<tr class="fade-in">
       <td style="color:var(--accent3);font-weight:700">${r.gk}</td>
       <td style="color:var(--muted)">${fmtD(r.date)}</td>
-      <td><span class="badge" style="color:var(--accent3);background:rgba(61,116,232,0.1)">${r.days||'—'} дн.</span></td>
       <td><span class="badge" style="color:var(--warn);background:rgba(230,168,0,0.1)">${r.compPct||0}%</span></td>
-      <td><span class="badge" style="color:var(--accent2);background:rgba(255,107,53,0.1)">${r.cr||0}%</span></td>
-      <td style="color:var(--accent)">${fmt(r.cashback)}</td>
       <td style="color:var(--purple)">${fmt(r.supplier)}</td>
       <td><button class="del-btn" onclick="delMkt(${idx})">×</button></td>
     </tr>`;
   }).join('');
-  const tc=mktRows.reduce((a,r)=>a+Number(r.cashback||0),0), ts=mktRows.reduce((a,r)=>a+Number(r.supplier||0),0);
+  const ts=mktRows.reduce((a,r)=>a+Number(r.supplier||0),0);
   document.getElementById('mkt-summary').innerHTML=`
-    <div class="sum-item"><span>Кешбек тотал</span><strong style="color:var(--accent)">${fmt(tc)}</strong></div>
     <div class="sum-item"><span>Компенсація постач.</span><strong style="color:var(--purple)">${fmt(ts)}</strong></div>
-    <div class="sum-item"><span>Різниця</span><strong style="color:var(--warn)">${fmt(tc-ts)}</strong></div>
   `;
 }
 function drawMktBar(){
   const gk={};
-  mktRows.forEach(r=>{if(!gk[r.gk])gk[r.gk]={cb:0,sup:0};gk[r.gk].cb+=Number(r.cashback||0);gk[r.gk].sup+=Number(r.supplier||0);});
+  mktRows.forEach(r=>{if(!gk[r.gk])gk[r.gk]={sup:0};gk[r.gk].sup+=Number(r.supplier||0);});
   const lbl=Object.keys(gk);
-  drawBar('chart-mkt-bar',lbl,[{data:lbl.map(k=>gk[k].cb),color:'#00e5a0'},{data:lbl.map(k=>gk[k].sup),color:'#c47aff'}]);
+  drawBar('chart-mkt-bar',lbl,[{data:lbl.map(k=>gk[k].sup),color:'#9b59d6'}]);
 }
 function drawMktCr(){
   const s=[...mktRows].sort((a,b)=>a.date.localeCompare(b.date));
   drawLine('chart-mkt-cr',s.map(r=>`${r.gk.slice(0,5)} ${fmtD(r.date).slice(0,5)}`),
-    [{data:s.map(r=>Number(r.cr)||0),color:'#ff6b35',fill:'rgba(255,107,53,0.1)',dotFn:()=>'#ff6b35'}],{pct:true});
+    [{data:s.map(r=>Number(r.compPct)||0),color:'#e6a800',fill:'rgba(230,168,0,0.1)',dotFn:()=>'#e6a800'}],{pct:true});
 }
 function addMkt(){
   const gk=document.getElementById('m-inp-gk').value.trim();
   const date=document.getElementById('m-inp-date').value;
   if(!gk||!date){alert('Заповніть ГК та дату!');return;}
-  mktRows.push({gk,date,days:parseInt(document.getElementById('m-inp-days').value)||0,compPct:parseFloat(document.getElementById('m-inp-comp-pct').value)||0,cr:parseFloat(document.getElementById('m-inp-cr').value)||0,cashback:parseFloat(document.getElementById('m-inp-cashback').value)||0,supplier:parseFloat(document.getElementById('m-inp-supplier').value)||0});
+  mktRows.push({gk,date,compPct:parseFloat(document.getElementById('m-inp-comp-pct').value)||0,supplier:parseFloat(document.getElementById('m-inp-supplier').value)||0});
   saveAll();renderMktAll();
-  ['m-inp-gk','m-inp-days','m-inp-comp-pct','m-inp-cr','m-inp-cashback','m-inp-supplier'].forEach(id=>document.getElementById(id).value='');
+  ['m-inp-gk','m-inp-comp-pct','m-inp-supplier'].forEach(id=>document.getElementById(id).value='');
 }
 function delMkt(i){mktRows.splice(i,1);saveAll();renderMktAll();}
 function renderMktAll(){renderMktKPI();renderMktTable();drawMktBar();drawMktCr();}
